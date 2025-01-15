@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.rabbitmqproducer.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,16 +24,14 @@ public class MessageController {
     @Operation(description = "Send message to RabbitMQ")
     @ApiResponse(responseCode = "204")
     @PostMapping
-    public ResponseEntity<Void> sendMessage(String message) {
+    public void sendMessage(String message) {
         service.sendMessage(message);
-        return ResponseEntity.noContent().build();
     }
 
     @Operation(description = "Send message to RabbitMQ in queue with delay")
     @ApiResponse(responseCode = "204")
     @PostMapping("/with_delay")
-    public ResponseEntity<Void> sendMessageWithDelay(String message) {
+    public void sendMessageWithDelay(String message) {
         service.sendMessageToQueueWithDelay(message);
-        return ResponseEntity.noContent().build();
     }
 }

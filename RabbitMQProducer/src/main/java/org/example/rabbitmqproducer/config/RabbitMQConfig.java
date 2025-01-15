@@ -25,7 +25,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Queue queue2() {
+    public Queue queueWithDelay() {
         return new Queue(queueWithDelayName, false);
     }
 
