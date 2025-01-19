@@ -60,10 +60,11 @@ public class RabbitMQListener {
         } else {
             withoutAutoAckMessageHash.add(message);
             System.out.println("Simulate exception");
+            channel.basicNack(tag, false, true);
         }
     }
 
-    @RabbitListener(queues = "#{@environment.getProperty('rabbitmq.queue_without_auto_ack.name')}")
+    @RabbitListener(queues = "#{@environment.getProperty('rabbitmq.durable_queue.name')}")
     public void receiveDurableMsg(String message) {
         System.out.println("Durable message: " + message);
     }
