@@ -1,7 +1,6 @@
 package org.example.rabbitmqconsumer.listener;
 
 import com.rabbitmq.client.Channel;
-import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.handler.annotation.Header;
