@@ -16,9 +16,9 @@ public class RabbitMQListener {
 
     private final static Random RANDOM = new Random();
 
-    private Set<String> withAutoAckMessageHash;
+    private final Set<String> withAutoAckMessageHash;
 
-    private Set<String> withoutAutoAckMessageHash;
+    private final Set<String> withoutAutoAckMessageHash;
 
     public RabbitMQListener() {
         withAutoAckMessageHash = new HashSet<>();
