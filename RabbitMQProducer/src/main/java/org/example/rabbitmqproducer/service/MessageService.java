@@ -16,6 +16,15 @@ public class MessageService {
     @Value("${rabbitmq.queue_with_delay.name}")
     private String messageWithDelayQueue;
 
+    @Value("${rabbitmq.queue_with_auto_ack.name}")
+    private String queueWithAutoAck;
+
+    @Value("${rabbitmq.queue_without_auto_ack.name}")
+    private String queueWithoutAutoAck;
+
+    @Value("${rabbitmq.durable_queue.name}")
+    private String durableQueue;
+
     @Autowired
     public MessageService(RabbitTemplate template) {
         this.template = template;
@@ -35,6 +44,23 @@ public class MessageService {
      */
     public void sendMessageToQueueWithDelay(String message) {
         template.convertAndSend(messageWithDelayQueue, message);
+    }
+
+    /**
+     * Посылает сообщение в две очереди: одна оповещается автоматически, вторая - нет
+     * @param message Сообщение
+     */
+    public void sendMessageToQueueWithAndWithoutAutoAck(String message) {
+        template.convertAndSend(queueWithAutoAck, message);
+        template.convertAndSend(queueWithoutAutoAck, message);
+    }
+
+    /**
+     * Посылает сообщение в очередь с установленным параметром durable
+     * @param message Сообщение
+     */
+    public void sendMessageToDurableQueue(String message) {
+        template.convertAndSend(durableQueue, message);
     }
 
 }

@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @Tag(name = "Message Controller", description = "Controller to send message to RabbitMQ")
 @RequestMapping("/message")
 public class MessageController {
@@ -34,4 +35,19 @@ public class MessageController {
     public void sendMessageWithDelay(String message) {
         service.sendMessageToQueueWithDelay(message);
     }
+
+    @Operation(description = "Send message to RabbitMQ in queue with autoAck and without autoAck")
+    @ApiResponse(responseCode = "204")
+    @PostMapping("/with_and_without_auto_ack")
+    public void sendMessageToQueueWithAndWithoutAutoAck(String message) {
+        service.sendMessageToQueueWithAndWithoutAutoAck(message);
+    }
+
+    @Operation(description = "Send message to RabbitMQ to durable Queue")
+    @ApiResponse(responseCode = "204")
+    @PostMapping("/send_message_to_durable_queue")
+    public void sendMessageToDurableQueue(String message) {
+        service.sendMessageToDurableQueue(message);
+    }
+
 }
